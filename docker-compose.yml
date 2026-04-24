@@ -1,0 +1,33 @@
+services:
+  node1:
+    build: .
+    cap_add:
+      - NET_ADMIN
+    environment:
+      - VXLAN_ID=100
+      - LOCAL_IP=172.20.0.2
+      - REMOTE_IP=172.20.0.3
+      - VXLAN_IP=10.0.0.1/24
+    networks:
+      underlay:
+        ipv4_address: 172.20.0.2
+
+  node2:
+    build: .
+    cap_add:
+      - NET_ADMIN
+    environment:
+      - VXLAN_ID=100
+      - LOCAL_IP=172.20.0.3
+      - REMOTE_IP=172.20.0.2
+      - VXLAN_IP=10.0.0.2/24
+    networks:
+      underlay:
+        ipv4_address: 172.20.0.3
+
+networks:
+  underlay:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16

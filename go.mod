@@ -1,4 +1,4 @@
-module go-vxlan
+module github.com/serverista/go-vxlan
 
 go 1.26.1
 
